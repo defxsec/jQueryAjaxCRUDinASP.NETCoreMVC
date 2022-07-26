@@ -1,0 +1,61 @@
+﻿@model IEnumerable<jQueryAjaxCRUDinASP.NETCoreMVC.Models.TransaccionModel>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.NumeroCuenta)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NombreBeneficiario)
+			</th>
+			@*<th>
+				@Html.DisplayNameFor(model => model.NombreBanco)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.CodigoSWIFT)
+			</th>*@
+			<th>
+				@Html.DisplayNameFor(model => model.Monto)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Fecha)
+			</th>
+			<th>
+				<a onclick="showInPopup('@Url.Action("AddOrEdit", "TransaccionModels", null, Context.Request.Scheme)','Nueva Transacción')" class="btn btn-success text-white"><i class="fas fa-random"></i>Nueva Transacción</a>								
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.NumeroCuenta)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NombreBeneficiario)
+				</td>
+				@*<td>
+					@Html.DisplayFor(modelItem => item.NombreBanco)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.CodigoSWIFT)
+				</td>*@
+				<td>
+					@Html.DisplayFor(modelItem => item.Monto)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Fecha)
+				</td>
+				<td>
+					<a onclick="showInPopup('@Url.Action("AddOrEdit", "TransaccionModels", new {id = item.TransaccionId}, Context.Request.Scheme)','Actualizar Transacción')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Editar</a>
+					<form asp-action="Delete" asp-route-id="@item.TransaccionId" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+						<input type="hidden" asp-for="@item.TransaccionId" />
+						<input type="submit" value="Delete" class="btn btn-danger" />
+					</form>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

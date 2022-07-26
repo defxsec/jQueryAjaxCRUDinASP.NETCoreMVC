@@ -1,7 +1,15 @@
+using jQueryAjaxCRUDinASP.NETCoreMVC.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Add DBContext
+builder.Services.AddDbContext<TransaccionDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));   
 
 var app = builder.Build();
 
